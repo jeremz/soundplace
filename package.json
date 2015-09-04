@@ -1,0 +1,21 @@
+{
+  "name": "soundplace",
+  "version": "1.0.0",
+  "description": "Enjoy Music with your friends",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "author": "Adrien Lavisiera & Jérémy Gacougnolle",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.12.1"
+  },
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "debug": "~2.2.0",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0"
+  }
+}
