@@ -1,15 +1,15 @@
-## Share Music with your friends
+# Share Music with your friends
 
-#### By Adrien Lavisiera & Jérémy Gacougnolle
+### By Adrien Lavisiera & Jérémy Gacougnolle
 
 ***
 
-###### Launch serveur on port 3000
-DEBUG=soundplace npm start
+##### Launch serveur on port 3000
+>DEBUG=soundplace npm start
 
-###### Init Project
+##### Init Project
 >npm install <br/>
 >gulp watch 
 
-###### Ready for Prod ?
-gulp prod
+##### Ready for Prod ?
+>gulp prod
