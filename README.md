@@ -5,11 +5,11 @@
 ***
 
 ###### Launch serveur on port 3000
-DEBUG=soundplace npm start
+| DEBUG=soundplace npm start |
 
 ###### Init Project
-npm install
-gulp watch
+|npm install|
+|gulp watch |
 
 ###### Ready for Prod ?
 gulp prod
