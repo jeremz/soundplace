@@ -9,6 +9,7 @@
   "author": "Adrien Lavisiera & Jérémy Gacougnolle",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^3.9.0",
     "webpack": "^1.12.1"
   },
   "dependencies": {
@@ -16,6 +17,9 @@
     "debug": "~2.2.0",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6",
+    "jquery": "^2.1.4",
+    "webpack-stream": "^2.1.0"
   }
 }
