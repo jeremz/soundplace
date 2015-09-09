@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
-	webpack = require('webpack-stream'),
-	gutil = require("gulp-util"),
+	  webpack = require('webpack-stream'),
+	  gutil = require("gulp-util"),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
@@ -36,7 +36,6 @@ gulp.task('scripts', function() {
     // .pipe(jshint('.jshintrc'))
     // .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    .pipe(notify({ message: 'CONCAT DONE. START WEBPACK' }))
     .pipe(gulp.src('assets/scripts/main.js'))
     .pipe(webpack( require('./webpack.config.js') ))
     .pipe(gulp.dest('public/'))
@@ -49,7 +48,6 @@ gulp.task('scriptsProd', function() {
     // .pipe(jshint('.jshintrc'))
     // .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    .pipe(notify({ message: 'CONCAT DONE. START WEBPACK' }))
     .pipe(gulp.src('assets/scripts/main.js'))
     .pipe(webpack( require('./webpack.config.js') ))
     .pipe(rename({ suffix: '.min' }))
@@ -69,7 +67,7 @@ gulp.task('imagesProd', function() {
 
 // Clean
 gulp.task('clean', function(cb) {
-    del(['public/assets/css', 'public/assets/js', 'public/assets/img'], cb)
+    del(['public/scripts', 'public/styles', 'public/images'], cb)
 });
 
 // Default task
@@ -89,7 +87,6 @@ gulp.task('watch', ['styles','scripts'], function() {
   gulp.watch('assets/styles/**/*.scss', ['styles']);
 
   // Watch .js files
-  // gulp.watch('assets/scripts/**/*.js', ['webpack']);
   gulp.watch('assets/scripts/**/*.js', ['scripts']);
 
   // Create LiveReload server
