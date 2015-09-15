@@ -1,3 +1,6 @@
 node_modules/
 front/.sass-cache
 front/public/
+front/.DS_Store
+npm-debug.log
+.DS_Store

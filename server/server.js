@@ -9,7 +9,7 @@ server.listen(3000);
 console.log("START");
 
 app.get('/', function (req, res) {
-  res.sendFile('./index.html', { root: 'front' });
+  res.sendFile('./login.html', { root: 'front/views' });
 });
 
 //LET ACCESS TO PUBLIC FOLDER
@@ -19,6 +19,7 @@ app.use(express.static('./front/public'));
 io.on('connection', function (socket) {
 	console.log('New User Bitch');
 	socket.on('name', function (data) {
+		console.log('User choose name : '+data.name);
 		socket.broadcast.emit('newName', { name: data });
 	});
 });
