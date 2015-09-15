@@ -2,4 +2,3 @@
 $ = require("jquery");
 require('./main');
 require('./../../../server/js/client.js');
-

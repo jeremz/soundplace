@@ -2,5 +2,9 @@ node_modules/
 front/.sass-cache
 front/public/
 front/.DS_Store
+<<<<<<< HEAD
 npm-debug.log
 .DS_Store
+=======
+npm-debug.log
+>>>>>>> f6ef23dfc35c5d35b8d53d31b42fac19deb858db

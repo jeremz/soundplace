@@ -56,17 +56,11 @@ gulp.task('clean', function(cb) {
     del(['public/scripts', 'public/styles', 'public/images'], cb)
 });
 
-// Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'images');
-});
-
 // Prod
 gulp.task('prod', ['clean','stylesProd','scriptsProd','imagesProd'], function() {
     notify({ message: 'task Prod complete' })
 });
 
-gulp.task('default', ['scripts'], function(){});
 // Watch
 gulp.task('watch', ['styles','scripts'], function() {
 
@@ -75,11 +69,4 @@ gulp.task('watch', ['styles','scripts'], function() {
 
   // Watch .js files
   gulp.watch(['assets/scripts/**/*.js','../server/js/**/*.js'], ['scripts']);
-
-  // Create LiveReload server
-  // livereload.listen();
-
-  // Watch any files in dist/, reload on change
-  // gulp.watch(['public/**']).on('change', livereload.changed);
-
 });
