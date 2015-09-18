@@ -1,0 +1,1 @@
+tplHome = require("./views/home.hbs");
