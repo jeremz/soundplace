@@ -8,7 +8,15 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
-    del = require('del');
+    del = require('del'),
+    connect = require('gulp-connect');
+
+// Serve
+gulp.task('serve', function() {
+  connect.server({
+    livereload: true
+  });
+});
 
 // Styles Watch
 gulp.task('styles', function() {
@@ -30,7 +38,7 @@ gulp.task('stylesProd', function() {
 gulp.task('scripts', function() {
     return webpack( require('./webpack.config.js') )
     .pipe(gulp.dest('public/'))
-    .pipe(notify({ message: 'Scripts task complete' }))
+    .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // Scripts Prod
@@ -62,7 +70,7 @@ gulp.task('prod', ['clean','stylesProd','scriptsProd','imagesProd'], function() 
 });
 
 // Watch
-gulp.task('watch', ['styles','scripts'], function() {
+gulp.task('watch', ['styles','scripts', 'serve'], function() {
 
   // Watch .scss files
   gulp.watch('assets/styles/**/*.scss', ['styles']);

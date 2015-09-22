@@ -1,56 +1,82 @@
 // Silence is golden
-$ = require("jquery");
-_ = require("underscore");
-require("backbone");
-require("backbone.marionette");
-require("underscore");
+// -----------------------------
+// Vendors
 
-Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
+var $ 			= require('jquery'),
+	Backbone 	= require('backbone'),
+	Marionette 	= require('backbone.marionette');
 
-var socket = io.connect('http://localhost:3000');
+var Controller  = require('./controller');
+var Router 		= require('./router');
 
-require("./views/room/room.js");
-require("./views/home/home.js")
 
-var username = "",
-	someone = "",
-	roomId = "";
 
-//-----------------------------------------------------------------------
-//								  		REMPLISSAGE DOM AVEC VUE BACKBONE
+// -----------------------------
+// Core
 
-// var AppView = Backbone.View.extend({
-// 	tagName : "div",
-// 	id: "view",
+var app = new Marionette.Application({
+	socketID: 0,
 
-// 	initialize: function () {
-// 		this.template = _.template(tplHome());
-//         this.render().$el.appendTo("#app"); 
-//     },
-//     render:function(){
-//     	this.$el.html(this.template());
-//         return this;
-//     },
-//     renderHome:function(){
-//     	this.template = _.template(tplRoom());
-//         this.render().$el.appendTo("#app"); 
-//     },
-//     renderRoom:function(){
-//     	this.template = _.template(tplRoom());
-//         this.render().$el.appendTo("#app"); 
-//         initRoom();
-//     },
-	
-// });
-
-var appView = new AppView();
-
-//-----------------------------------------------------------------------
-//															 TEST ROUTING
-
-var router = Backbone.Router.extend({})
-Backbone.history.start({pushState: true});
-
-socket.on('userId', function(data){
-	userId = data.userId;
+	size: function(){
+		// TODO
+	},
 });
+
+app.addInitializer(function(options){
+	new Router({
+		controller: controller
+	});
+
+	Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
+});
+
+var controller = new Controller({
+	app: app
+});
+
+app.on("start", function(){
+	// Start history
+	if (Backbone.history){
+		Backbone.history.start({pushState: true});
+    }
+
+    // Get GPS
+ 	navigator.geolocation.getCurrentPosition(function(position){
+		app.gps = position;
+	}, function(error){
+		console.error(error);
+	});
+});
+
+app.start();
+
+module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var socket = io.connect('http://localhost:3000');
+
+// var username = "",
+// 	someone = "",
+// 	roomId = "";
+
+
+// socket.on('userId', function(data){
+// 	userId = data.userId;
+// });

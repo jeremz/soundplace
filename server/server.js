@@ -1,7 +1,15 @@
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+// -----------------------------
+// Vendors
+
+var express 	= require('express');
+var app 		= express();
+var server 		= require('http').Server(app);
+var io 			= require('socket.io')(server);
+
+
+
+// -----------------------------
+// Core
 
 server.listen(3000);
 
@@ -9,11 +17,11 @@ server.listen(3000);
 console.log("START");
 
 app.get('/', function (req, res) {
-  res.sendFile('./index.html', { root: 'front' });
+	// Get des rooms > JSON
 });
 
 //LET ACCESS TO PUBLIC FOLDER
-app.use(express.static('./front/public'));
+// app.use(express.static('./front/public'));
 
 // WHEN NEW USER
 io.on('connection', function (socket) {
