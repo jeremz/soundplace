@@ -11,6 +11,7 @@ var Router 		= require('./router');
 
 
 
+
 // -----------------------------
 // Core
 
@@ -28,6 +29,7 @@ app.addInitializer(function(options){
 	});
 
 	Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
+	app.socket = io.connect('http://localhost:3000');
 });
 
 var controller = new Controller({
@@ -70,7 +72,7 @@ module.exports = app;
 
 
 
-// var socket = io.connect('http://localhost:3000');
+
 
 // var username = "",
 // 	someone = "",

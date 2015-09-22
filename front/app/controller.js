@@ -52,6 +52,7 @@ module.exports = Marionette.Controller.extend({
     showHome: function() {
         // Debug
         console.log("HOME SWEET HOME");
+
     }
 
 });
