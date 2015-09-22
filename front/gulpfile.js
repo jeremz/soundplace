@@ -68,5 +68,5 @@ gulp.task('watch', ['styles','scripts'], function() {
   gulp.watch('assets/styles/**/*.scss', ['styles']);
 
   // Watch .js files
-  gulp.watch(['assets/scripts/**/*.js','../server/js/**/*.js'], ['scripts']);
+  gulp.watch(['app/**/*.js','../server/js/**/*.js'], ['scripts']);
 });

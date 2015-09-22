@@ -1,6 +1,6 @@
 module.exports = {
     // watch: true,
-    entry: "./assets/scripts/all.js",
+    entry: "./app/app.js",
     output: {
         path: __dirname,
         filename: "scripts/bundle.js"
