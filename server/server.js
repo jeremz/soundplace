@@ -1,12 +1,15 @@
 // -----------------------------
 // Vendors
 
-var express 	= require('express');
-var app 		= express();
-var server 		= require('http').Server(app);
-var io 			= require('socket.io')(server);
+var express 	= require('express'),
+	app 		= express(),
+	server 		= require('http').Server(app),
+	io 			= require('socket.io')(server),
+	Parse 		= require('parse/node');
 
+Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
 
+require('./routes/routes')(app);
 
 // -----------------------------
 // Core
@@ -15,13 +18,6 @@ server.listen(3000);
 
 //SERVER IS STARTED
 console.log("START");
-
-app.get('/', function (req, res) {
-	// Get des rooms > JSON
-});
-
-//LET ACCESS TO PUBLIC FOLDER
-// app.use(express.static('./front/public'));
 
 // WHEN NEW USER
 io.on('connection', function (socket) {
