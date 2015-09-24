@@ -11,8 +11,15 @@ var requestAgent    = require('superagent');
 // -----------------------------
 // Layouts
 
-var Room = require("./views/room/room.js");
-var Home = require("./views/home/home.js");
+var MainLayout      = require("./layouts/main.js");
+
+
+
+// -----------------------------
+// Views
+
+var RoomView        = require("./views/room/room.js");
+var HomeView        = require("./views/home/home.js");
 
 
 
@@ -25,7 +32,7 @@ var Home = require("./views/home/home.js");
 // -----------------------------
 // Locals
 
-var Utils = require('./utils')();
+var Utils   = require('./utils')();
 
 
 
@@ -38,9 +45,13 @@ module.exports = Marionette.Controller.extend({
         // Debug
         console.info("Initializing Soundplace...");
 
-        _.bindAll(this, "onStart");
+        _.bindAll(this, "onStart", "showHome");
 
-        app = options.app;
+        this.app = options.app;
+        console.log(this.app);
+
+        this.layout = new MainLayout();
+        this.app.mainContainer.show(this.layout);
 	},
 
     onStart: function() {
@@ -52,7 +63,10 @@ module.exports = Marionette.Controller.extend({
     showHome: function() {
         // Debug
         console.log("HOME SWEET HOME");
+        var that = this;
 
+        var page = new HomeView();
+        that.layout.content.show(page);
     }
 
 });

@@ -11,32 +11,35 @@ var Router 		= require('./router');
 
 
 
+// -----------------------------
+// Utils
+
+var Utils = require("./utils")();
+
+
+
 
 // -----------------------------
 // Core
 
 var app = new Marionette.Application({
-	socketID: 0,
-
-	size: function(){
-		// TODO
-	},
+	container: 'body',
 });
 
-app.addInitializer(function(options){
+app.addRegions({
+	mainContainer: app.container
+});
+
+var controller = new Controller({app: app});
+
+app.on("start", function(){
 	new Router({
 		controller: controller
 	});
 
 	Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
-	app.socket = io.connect('http://localhost:3000');
-});
+	app.socket = io.connect(Utils.api_host);
 
-var controller = new Controller({
-	app: app
-});
-
-app.on("start", function(){
 	// Start history
 	if (Backbone.history){
 		Backbone.history.start({pushState: true});

@@ -3,6 +3,8 @@
 
 var Marionette 	= require('backbone.marionette');
 var $ 			= require('jquery');
+var request		= require('superagent');
+var io			= require('socket.io');
 
 
 
@@ -16,10 +18,11 @@ var $ 			= require('jquery');
 // -----------------------------
 // Layouts
 
-var tplHome = require("./home.hbs");
+var tpl = require("./home.hbs");
 
 module.exports = Marionette.CompositeView.extend({
 
+	template: tpl,
 	tagName : "div",
 	id: "home",
 
@@ -32,14 +35,24 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	onShow: function(){
-		console.log("dsfsdfs");
+
 	},
 
 	createRoom: function(){
 		e.preventDefault();
-		roomName = $(".createRoom").find("input").val();
-		var Rooms = Parse.Object.extend("Rooms");
-		var rooms = new Rooms();
+
+		superagent
+			.post(Utils.api_host + "room")
+			.send({"some": "data"})
+			.end(function(err, res){
+				console.log(err);
+				console.log(res);
+			})
+
+
+		// roomName = $(".createRoom").find("input").val();
+		// var Rooms = Parse.Object.extend("Rooms");
+		// var rooms = new Rooms();
 		// rooms.save({room: roomName, creator: userId}).then(function(object) {
 	 //  		roomId = object.id;
 	 //  		router = new Backbone.Router();

@@ -6,7 +6,7 @@ var _           = require('underscore');
 
 var Api = {
     dev: {
-        api_host: 'http://localhost:3000/',
+        api_host: 'http://10.0.0.5:3000/',
     },
     staging: {
         //api_host: 'http://staging.clintagency.com:3000/',
@@ -39,7 +39,7 @@ var getConf = function() {
         config = Api.prod;
     }
 
-    config = Api.prod;
+    config = Api.dev;
 
     // Merge common config
     config = $.extend({}, config, Utils)
