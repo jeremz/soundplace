@@ -11,6 +11,7 @@ var Utils = require('./../../utils')();
 var Marionette 	= require('backbone.marionette');
 var $ 			= require('jquery');
 var request		= require('superagent');
+var _			= require('underscore');
 var socket 		= io.connect(Utils.api_host);
 
 
@@ -31,15 +32,22 @@ module.exports = Marionette.CompositeView.extend({
 		"click .submitCreateRoom" : "createRoom"
 	},
 
-	initialize: function(){
-
+	initialize: function(options){
+		_.bindAll(this, "onShow");
+		this.rooms = options.rooms;
 	},
 
 	onShow: function(){
+		var that = this;
+
+		$.each(that.rooms, function(i, el){
+			$(".rooms").find("ul").append("<li>" + el.roomName + "</li>");
+		})
+
 		socket.on('newRoom', function (data){
 			roomName = data.roomName;
-			$(".rooms").find("ul").append(roomName);
-		})
+			$(".rooms").find("ul").append("<li>" + roomName + "</li>");
+		});
 	},
 
 	createRoom: function(e){
@@ -53,8 +61,5 @@ module.exports = Marionette.CompositeView.extend({
 			.end(function(err, res){
 				roomId = res.body;
 			})
-
-
-
 	}
 })

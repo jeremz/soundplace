@@ -4,7 +4,7 @@
 var Marionette      = require('backbone.marionette');
 var _               = require('underscore');
 var $               = require('jquery');
-var requestAgent    = require('superagent');
+var request         = require('superagent');
 
 
 
@@ -65,8 +65,18 @@ module.exports = Marionette.Controller.extend({
         console.log("HOME SWEET HOME");
         var that = this;
 
-        var page = new HomeView();
-        that.layout.content.show(page);
-    }
+        var rooms;
 
+        var onSuccess = function(){
+            var page = new HomeView({rooms: rooms});
+            that.layout.content.show(page);
+        }
+
+        request
+            .get(Utils.api_host)
+            .end(function(err, res){
+                rooms = res.body;
+                onSuccess(rooms);
+            })
+    }
 });
