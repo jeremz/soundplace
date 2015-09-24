@@ -1,33 +1,41 @@
-var Parse = require('parse/node');
+// ---------------------------------------------------------------------
+// 													 			 VENDORS
+											 	     	
+var Parse 		= require('parse/node');
+var express 	= require('express');
+var router 		= express.Router();
 
+
+
+// ---------------------------------------------------------------------
+// 													 	     CONTROLLERS
+
+var home = require('../controllers/home');
+var room = require('../controllers/room');
+
+
+
+// ---------------------------------------------------------------------
+// 																  ROUTES
 module.exports = function(app){
 
-
-
-// ---------------------------------------------------------------------
-// 																	HOME
-    app.get('/', function(req, res){
-        res.json({"test":"oklm"});
-    });
-
-    var query = new Parse.Query("Rooms");
-	query.find({
-		success: function(objectId) {
-		    for (var i = 0; i < objectId.length; ++i) {
-		      	console.log(objectId[i].get('creator'));
-		    }
-		},
-
-		error: function(object, error) {
-		    console.error("error");
-		}
-	});
+	app.use('/', router);
 
 
 
-// ---------------------------------------------------------------------
-// 																	ROOM
-    app.get('/room', function(req, res){
-        res.send("oklm");
-    });
+	// -----------------------------
+	// HOME
+
+	router.route('/')
+		.get(home.infos);
+
+
+
+	// -----------------------------
+	// ROOM
+
+	router.route('/room')
+		.get(room.create)
+		.get(room.infos);
+
 }

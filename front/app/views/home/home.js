@@ -4,14 +4,14 @@
 var Marionette 	= require('backbone.marionette');
 var $ 			= require('jquery');
 var request		= require('superagent');
-var io			= require('socket.io');
+// var io			= require('socket.io');
 
 
 
 // -----------------------------
 // Utils
 
-// var Utils = require('../utils')();
+var Utils = require('./../../utils')();
 
 
 
