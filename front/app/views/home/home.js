@@ -41,12 +41,12 @@ module.exports = Marionette.CompositeView.extend({
 		var that = this;
 
 		$.each(that.rooms, function(i, el){
-			$(".rooms").find("ul").append("<li>" + el.roomName + "</li>");
+			$(".rooms").find("ul").prepend("<li>" + el.roomName + "</li>");
 		})
 
 		socket.on('newRoom', function (data){
 			roomName = data.roomName;
-			$(".rooms").find("ul").append("<li>" + roomName + "</li>");
+			$(".rooms").find("ul").prepend("<li>" + roomName + "</li>");
 		});
 	},
 
