@@ -1,17 +1,18 @@
 // -----------------------------
+// Utils
+
+var Utils = require('./../../utils')();
+
+
+
+// -----------------------------
 // Vendors
 
 var Marionette 	= require('backbone.marionette');
 var $ 			= require('jquery');
 var request		= require('superagent');
-// var io			= require('socket.io');
+var socket 		= io.connect(Utils.api_host);
 
-
-
-// -----------------------------
-// Utils
-
-var Utils = require('./../../utils')();
 
 
 
@@ -27,7 +28,7 @@ module.exports = Marionette.CompositeView.extend({
 	id: "home",
 
 	events: {
-		"click .createRoom" : "createRoom"
+		"click .submitCreateRoom" : "createRoom"
 	},
 
 	initialize: function(){
@@ -35,30 +36,25 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	onShow: function(){
-
+		socket.on('newRoom', function (data){
+			roomName = data.roomName;
+			$(".rooms").find("ul").append(roomName);
+		})
 	},
 
-	createRoom: function(){
+	createRoom: function(e){
 		e.preventDefault();
 
-		superagent
+		roomName = $(".createRoom").find("input[type='text']").val();
+
+		request
 			.post(Utils.api_host + "room")
-			.send({"some": "data"})
+			.send({"roomName": roomName})
 			.end(function(err, res){
-				console.log(err);
-				console.log(res);
+				roomId = res.body;
 			})
 
 
-		// roomName = $(".createRoom").find("input").val();
-		// var Rooms = Parse.Object.extend("Rooms");
-		// var rooms = new Rooms();
-		// rooms.save({room: roomName, creator: userId}).then(function(object) {
-	 //  		roomId = object.id;
-	 //  		router = new Backbone.Router();
-		// 	router.navigate("room/"+roomId);
-		// 	appView.remove();
-		// 	appView.renderRoom();
-	 //  	});	
+
 	}
 })

@@ -35,7 +35,9 @@ module.exports = function(app){
 	// ROOM
 
 	router.route('/room')
-		.get(room.create)
-		.get(room.infos);
+		.post(room.create);
+
+	router.route('/room/:id')
+		.get(room.infos)
 
 }
