@@ -72,10 +72,14 @@ module.exports = Marionette.Controller.extend({
             that.layout.content.show(page);
         }
 
+        var data = {"roomLocation": {"latitude":48.8864273, "longitude":2.3151762}};
         request
-            .get(Utils.api_host)
+            .post(Utils.api_host)
+            .send(data)
             .end(function(err, res){
                 rooms = res.body;
+                console.log(rooms)
+
                 onSuccess(rooms);
             })
     }

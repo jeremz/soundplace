@@ -27,8 +27,7 @@ module.exports = function(app){
 	// HOME
 
 	router.route('/')
-		.get(home.infos);
-
+		.post(home.create);
 
 
 	// -----------------------------
