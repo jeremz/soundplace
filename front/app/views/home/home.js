@@ -53,11 +53,12 @@ module.exports = Marionette.CompositeView.extend({
 	createRoom: function(e){
 		e.preventDefault();
 
-		roomName = $(".createRoom").find("input[type='text']").val();
+		var roomName = $(".createRoom").find("input[type='text']").val(),
+			roomLocation = {"latitude":48.8864273, "longitude":2.3151762}
 
 		request
 			.post(Utils.api_host + "room")
-			.send({"roomName": roomName})
+			.send({"roomName": roomName, "roomLocation":roomLocation})
 			.end(function(err, res){
 				roomId = res.body;
 			})
