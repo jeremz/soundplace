@@ -9,7 +9,7 @@ module.exports = Backbone.View.extend({
 		"click .loginForm" : "login"
 	},
 
-	initialize: function () {
+	initialize: function (options) {
 		this.template = _.template(tplHome());
         this.render().$el.appendTo("#app"); 
     },

@@ -24,6 +24,10 @@ var Utils = require("./utils")();
 
 var app = new Marionette.Application({
 	container: 'body',
+
+	navigate: function(route, options){
+		
+	}
 });
 
 app.addRegions({

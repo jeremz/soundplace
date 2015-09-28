@@ -45,7 +45,7 @@ module.exports = Marionette.Controller.extend({
         // Debug
         console.info("Initializing Soundplace...");
 
-        _.bindAll(this, "onStart", "showHome");
+        _.bindAll(this, "onStart", "showHome", "showRoom");
 
         this.app = options.app;
         console.log(this.app);
@@ -68,7 +68,7 @@ module.exports = Marionette.Controller.extend({
         var rooms;
 
         var onSuccess = function(){
-            var page = new HomeView({rooms: rooms});
+            var page = new HomeView({rooms: rooms, app: that.app});
             that.layout.content.show(page);
         }
 
@@ -82,5 +82,17 @@ module.exports = Marionette.Controller.extend({
 
                 onSuccess(rooms);
             })
+    },
+
+    showRoom: function() {
+        var that = this;
+
+        console.info("Layout Rooms");
+
+        var onSuccess = function(){
+            var page = new RoomView({rooms: rooms});
+            that.layout.content.show(page);
+        };
+
     }
 });

@@ -33,8 +33,9 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	initialize: function(options){
-		_.bindAll(this, "onShow");
+		_.bindAll(this, "onShow", "createRoom");
 		this.rooms = options.rooms;
+		this.app = options.app;
 	},
 
 	onShow: function(){
@@ -53,7 +54,8 @@ module.exports = Marionette.CompositeView.extend({
 	createRoom: function(e){
 		e.preventDefault();
 
-		var roomName = $(".createRoom").find("input[type='text']").val(),
+		var that = this,
+			roomName = $(".createRoom").find("input[type='text']").val(),
 			roomLocation = {"latitude":48.8864273, "longitude":2.3151762}
 
 		request
@@ -61,6 +63,8 @@ module.exports = Marionette.CompositeView.extend({
 			.send({"roomName": roomName, "roomLocation":roomLocation})
 			.end(function(err, res){
 				roomId = res.body;
+				that.app.navigate("/room", {trigger: true});
 			})
+
 	}
 })
