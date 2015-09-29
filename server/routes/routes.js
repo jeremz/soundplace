@@ -39,4 +39,7 @@ module.exports = function(app){
 	router.route('/room/:id')
 		.get(room.infos)
 
+	router.route('/room/:id')
+		.put(room.update)
+
 }

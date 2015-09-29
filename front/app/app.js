@@ -1,4 +1,3 @@
-// Silence is golden
 // -----------------------------
 // Vendors
 
@@ -26,7 +25,7 @@ var app = new Marionette.Application({
 	container: 'body',
 
 	navigate: function(route, options){
-		
+
 	}
 });
 
@@ -63,29 +62,3 @@ module.exports = app;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var username = "",
-// 	someone = "",
-// 	roomId = "";
-
-
-// socket.on('userId', function(data){
-// 	userId = data.userId;
-// });

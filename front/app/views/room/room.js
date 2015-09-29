@@ -1,7 +1,11 @@
-tplRoom = require("./room.hbs");
+var Marionette 	= require('backbone.marionette');
 
-module.exports = Backbone.View.extend({
+var tpl = require("./room.hbs");
 
+
+module.exports = Marionette.CompositeView.extend({
+
+	template: tpl,
 	tagName : "div",
 	id: "room",
 
