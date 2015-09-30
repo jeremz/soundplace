@@ -11,7 +11,7 @@ var request         = require('superagent');
 // -----------------------------
 // Layouts
 
-var MainLayout      = require("./layouts/main.js");
+var MainLayout      = require("./layout/main.js");
 
 
 
@@ -90,9 +90,21 @@ module.exports = Marionette.Controller.extend({
         console.info("Layout Rooms");
 
         var onSuccess = function(){
-            var page = new RoomView({rooms: rooms});
+            var page = new RoomView({room: room});
             that.layout.content.show(page);
         };
+
+        roomName = $(".createRoom").find("input[type='text']").val(),
+        roomLocation = {"latitude":48.8864273, "longitude":2.3151762}
+
+        request
+            .post(Utils.api_host + "room")
+            .send({"roomName": roomName, "roomLocation":roomLocation})
+            .end(function(err, res){
+                room = res.body;
+                Utils.routing.navigate('room', {trigger: true});
+                 onSuccess(room);
+            })
 
     }
 });

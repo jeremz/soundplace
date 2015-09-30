@@ -1,12 +1,12 @@
-// -----------------------------
-// Utils
+// ---------------------------------------------------------------------
+// 													 			   UTILS
 
 var Utils = require('./../../utils')();
 
 
 
-// -----------------------------
-// Vendors
+// ---------------------------------------------------------------------
+// 													 			 VENDORS
 
 var Marionette 	= require('backbone.marionette');
 var $ 			= require('jquery');
@@ -16,9 +16,8 @@ var socket 		= io.connect(Utils.api_host);
 
 
 
-
-// -----------------------------
-// Layouts
+// ---------------------------------------------------------------------
+// 													 			  LAYOUT
 
 var tpl = require("./home.hbs");
 
@@ -54,17 +53,9 @@ module.exports = Marionette.CompositeView.extend({
 	createRoom: function(e){
 		e.preventDefault();
 
-		var that = this,
-			roomName = $(".createRoom").find("input[type='text']").val(),
-			roomLocation = {"latitude":48.8864273, "longitude":2.3151762}
+		var that = this;
 
-		request
-			.post(Utils.api_host + "room")
-			.send({"roomName": roomName, "roomLocation":roomLocation})
-			.end(function(err, res){
-				roomId = res.body;
-				that.app.navigate("/room", {trigger: true});
-			})
+		Utils.routing.navigate('room', {trigger: true});
 
 	}
 })

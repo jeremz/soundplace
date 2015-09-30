@@ -2,7 +2,7 @@ var io = require('socket.io')();
 
 // WHEN NEW USER
 io.on('connection', function (socket) {
-
+	io.socket = socket;
 	console.log('New User Bitch');
 
 	socket.join('home');

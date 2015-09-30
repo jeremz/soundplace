@@ -18,6 +18,7 @@ var trier;
 
 exports.create = function(req, res, next){
 
+
 	var roomLocation = req.body.roomLocation;
 
 	var query = new Parse.Query("Rooms");
@@ -26,13 +27,13 @@ exports.create = function(req, res, next){
 	// -----------------------------
 	// If User have a location
 	if(!isNaN(roomLocation.latitude) && typeof roomLocation.latitude == "number"){
-
 		var getMore = function(reste){
 			query = new Parse.Query("Rooms");
 			query.descending("createdAt");
 			query.equalTo("location", null);
 			query.limit(reste);
 			query.find().then(function(addResults){
+
 				Array.prototype.push.apply(trier, addResults);
 				res.send(trier);
 			});
@@ -45,6 +46,9 @@ exports.create = function(req, res, next){
 			
 			if(limit - results.length != 0){
 				getMore(limit - results.length);
+			}
+			else{
+				res.send(results);
 			};
 		});
 			

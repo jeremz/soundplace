@@ -18,6 +18,12 @@ var Api = {
 
 var Utils = {
 
+     routing: {
+        navigate: function(route, options) {
+            options || (options = {});
+            return Backbone.history.navigate(route, options);
+        }
+    },
     
 }
 

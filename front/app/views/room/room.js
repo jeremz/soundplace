@@ -1,7 +1,25 @@
+// ---------------------------------------------------------------------
+// 													 			   UTILS
+
+var Utils = require('./../../utils')();
+
+
+
+// ---------------------------------------------------------------------
+// 													 			 VENDORS
+
 var Marionette 	= require('backbone.marionette');
+var $ 			= require('jquery');
+var request		= require('superagent');
+var _			= require('underscore');
+var socket 		= io.connect(Utils.api_host);
+
+
+
+// ---------------------------------------------------------------------
+// 													 			  LAYOUT
 
 var tpl = require("./room.hbs");
-
 
 module.exports = Marionette.CompositeView.extend({
 
@@ -14,20 +32,24 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	initialize: function (options) {
-		this.template = _.template(tplHome());
-        this.render().$el.appendTo("#app"); 
+		_.bindAll(this, "onShow", "login");
+		this.rooms = options.rooms;
+		this.app = options.app;
     },
-    render:function(){
-    	this.$el.html(this.template());
-        return this;
-    },
+    onShow: function(){
+		var that = this;
+
+		$.each(that.rooms, function(i, el){
+			$(".participants").find("ul").append("<li>" + el.roomName + "</li>");
+		})
+
+		socket.on('newRoom', function (data){
+			roomName = data.roomName;
+			$(".participants").find("ul").append("<li>" + roomName + "</li>");
+		});
+	},
 	login: function(){
 		e.preventDefault();
 		console.log("coucouille");
-	},
-	remove: function(){
-		console.log(this.$el)
-		this.$el.remove();
-		return this;
 	}
 })

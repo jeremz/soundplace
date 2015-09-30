@@ -28,7 +28,7 @@ exports.create = function(req, res, next){
 	
 	rooms.save(data).then(function(object) {
   		roomId = object.id;
-  		socket.join(roomId);
+  		io.socket.join(roomId);
   		io.to('home').emit('newRoom', {roomName: roomName});
   		res.json(roomId)
   	});	
@@ -67,5 +67,6 @@ exports.update = function(req, res, next){
 	rooms.save(data).then(function(object) {
 
 		io.to(roomId).emit('roomUpdate', {room: object});
+		io.to('home').emit('roomUpdate', {room: object});
 	});
 }

@@ -12,7 +12,7 @@ module.exports = Marionette.AppRouter.extend({
 
     appRoutes: {
     	'' : "showHome",
-    	'/room': 'showRoom',
+    	'room': 'showRoom',
     }
 
 });
