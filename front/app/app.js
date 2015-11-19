@@ -33,8 +33,6 @@ app.addRegions({
 	mainContainer: app.container
 });
 
-var controller = new Controller({app: app});
-
 app.on("start", function(){
 	new Router({
 		controller: controller
@@ -43,18 +41,18 @@ app.on("start", function(){
 	Parse.initialize("aim3575s3Q2lOjFMrBTYkkTiQXf8jm9hHBm5Bi2I", "r4c63xZ7ZNX0gUTijmjGPCQ8nXu2axVimZvG8eME");
 	app.socket = io.connect(Utils.api_host);
 
-	// Start history
-	if (Backbone.history){
-		Backbone.history.start({pushState: true});
-    }
-
     // Get GPS
  	navigator.geolocation.getCurrentPosition(function(position){
 		app.gps = position;
 	}, function(error){
 		console.error(error);
 	});
+
+	// Start history
+	Backbone.history.start();
 });
+
+var controller = new Controller({app: app});
 
 app.start();
 

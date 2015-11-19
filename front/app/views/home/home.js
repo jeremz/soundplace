@@ -55,7 +55,18 @@ module.exports = Marionette.CompositeView.extend({
 
 		var that = this;
 
-		Utils.routing.navigate('room', {trigger: true});
+		var roomName = $(".createRoom").find("input[type='text']").val();
 
+        // var roomLocation = {"roomLocation": {"latitude":48.8864273, "longitude":2.3151762}}; // Clint
+        var roomLocation = {"roomLocation": {"latitude":48.8203119, "longitude":2.3750716}}; // P13
+        // var roomLocation = {"roomLocation": this.app.gps.coords};
+
+        request
+            .post(Utils.api_host + "room")
+            .send({"roomName": roomName, "roomLocation":roomLocation})
+            .end(function(err, res){
+                room = res.body;
+                Utils.routing.navigate('room/' + room.objectId, {trigger: true});
+            });
 	}
 })

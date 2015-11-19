@@ -6,8 +6,9 @@ module.exports = {
         filename: "scripts/bundle.js"
     },
     module: {
-    loaders: [
-      { test: /\.hbs$/, loader: "handlebars-loader" }
-    ]
-  }
+        loaders: [
+            { test: /\.hbs$/, loader: "handlebars-loader" }
+        ]
+    },
+    devtool: "eval"
 };

@@ -48,7 +48,6 @@ module.exports = Marionette.Controller.extend({
         _.bindAll(this, "onStart", "showHome", "showRoom");
 
         this.app = options.app;
-        console.log(this.app);
 
         this.layout = new MainLayout();
         this.app.mainContainer.show(this.layout);
@@ -72,19 +71,20 @@ module.exports = Marionette.Controller.extend({
             that.layout.content.show(page);
         }
 
-        var data = {"roomLocation": {"latitude":48.8864273, "longitude":2.3151762}};
+        // var data = {"roomLocation": {"latitude":48.8864273, "longitude":2.3151762}}; // Clint
+        var data = {"roomLocation": {"latitude":48.8203119, "longitude":2.3750716}}; // P13
+        // var data = {"roomLocation": this.app.gps.coords};
         request
             .post(Utils.api_host)
             .send(data)
             .end(function(err, res){
                 rooms = res.body;
                 console.log(rooms)
-
                 onSuccess(rooms);
             })
     },
 
-    showRoom: function() {
+    showRoom: function(id) {
         var that = this;
 
         console.info("Layout Rooms");
@@ -94,17 +94,11 @@ module.exports = Marionette.Controller.extend({
             that.layout.content.show(page);
         };
 
-        roomName = $(".createRoom").find("input[type='text']").val(),
-        roomLocation = {"latitude":48.8864273, "longitude":2.3151762}
-
         request
-            .post(Utils.api_host + "room")
-            .send({"roomName": roomName, "roomLocation":roomLocation})
+            .get(Utils.api_host + "room/" + id)
             .end(function(err, res){
                 room = res.body;
-                Utils.routing.navigate('room', {trigger: true});
-                 onSuccess(room);
-            })
-
+                onSuccess(room);
+            });
     }
 });

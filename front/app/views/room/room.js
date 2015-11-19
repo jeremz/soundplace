@@ -33,22 +33,21 @@ module.exports = Marionette.CompositeView.extend({
 
 	initialize: function (options) {
 		_.bindAll(this, "onShow", "login");
-		this.rooms = options.rooms;
-		this.app = options.app;
+
+		this.room = options.room;
+    },
+    serializeData: function(){
+    	return {
+    		room: this.room
+    	}
     },
     onShow: function(){
 		var that = this;
+		
+		console.log(that.room);
 
-		$.each(that.rooms, function(i, el){
-			$(".participants").find("ul").append("<li>" + el.roomName + "</li>");
-		})
-
-		socket.on('newRoom', function (data){
-			roomName = data.roomName;
-			$(".participants").find("ul").append("<li>" + roomName + "</li>");
-		});
 	},
-	login: function(){
+	login: function(e){
 		e.preventDefault();
 		console.log("coucouille");
 	}

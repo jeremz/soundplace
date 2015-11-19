@@ -6,13 +6,13 @@ var _           = require('underscore');
 
 var Api = {
     dev: {
-        api_host: 'http://10.0.0.5:3000/',
+        api_host: 'http://localhost:3000/',
     },
     staging: {
         //api_host: 'http://staging.clintagency.com:3000/',
     },
     prod: {
-        api_host: 'http://www.clintagency.com:3003/',
+        // api_host: 'http://www.clintagency.com:3003/',
     }
 };
 
